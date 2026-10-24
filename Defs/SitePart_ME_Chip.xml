@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <SitePartDef>
+    <defName>TSA_MicroelectronicsCachePart</defName>
+    <label>encampment with CPU chip</label>
+    <description>A small guarded encampment holding a recoverable microelectronics chip.</description>
+    <workerClass>TSA.MicroQuest.SitePartWorker_MicroCache</workerClass>
+    <wantsThreatPoints>true</wantsThreatPoints>
+	<siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/ItemStash</expandingIconTexture>
+    <tags><li>TSAMicroCache</li></tags>
+  </SitePartDef>
+</Defs>

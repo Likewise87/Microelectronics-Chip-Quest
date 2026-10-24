@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>TSA_MicroelectronicsCache_Quest</defName>
+    <autoAccept>True</autoAccept>
+    <isRootSpecial>True</isRootSpecial>
+
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The CPU Chip</li>
+      </rulesStrings>
+    </questNameRules>
+
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->A small emplacement was spotted nearby that holds a CPU chip. Analyzing this chip might allow us to unlock the Microelectronics technology.\n\nIt is protected by several raiders.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <!-- Prefer slate siteTile from C#; otherwise pick a nearby site tile. -->
+        <li Class="QuestNode_IsSet">
+          <name>siteTile</name>
+          <elseNode Class="QuestNode_GetSiteTile">
+            <storeAs>siteTile</storeAs>
+            <preferCloserTiles>true</preferCloserTiles>
+          </elseNode>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>TSAMicroCache</tag></li>
+          </sitePartsTags>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+          <storeAs>sitePoints</storeAs>
+        </li>
+
+        <li Class="QuestNode_GenerateSite">
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+          <faction>$siteFaction</faction>
+          <tile>$siteTile</tile>
+          <storeAs>site</storeAs>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(12,28)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Quest expired: [resolvedQuestName]</label>
+                <text>The microelectronics cache was claimed by others. The quest [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

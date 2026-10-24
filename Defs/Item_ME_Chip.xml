@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<ThingDef ParentName="ResourceBase">
+  <defName>Microelectronics_Chip</defName>
+  <label>microelectronics chip</label>
+  <description>A CPU chip from old times that might hold the secret to learning about microelectronics.</description>
+  <graphicData>
+    <texPath>Things/Item/ME-Chip</texPath>
+    <graphicClass>Graphic_Single</graphicClass>
+	<drawSize>0.7</drawSize>
+  </graphicData>
+  <thingCategories>
+    <li>Manufactured</li>
+  </thingCategories>
+  <statBases>
+    <Flammability>0</Flammability>
+    <DeteriorationRate>0</DeteriorationRate>
+    <MaxHitPoints>100</MaxHitPoints>
+    <MarketValue>0</MarketValue>
+    <Mass>0.2</Mass>
+  </statBases>
+  <stackLimit>1</stackLimit>
+  <tradeability>None</tradeability>
+  <comps>
+    <li Class="CompProperties_CompAnalyzableUnlockResearch">
+      <analysisID>82345017</analysisID>
+      <requiresMechanitor>false</requiresMechanitor>
+      <analysisDurationHours>0.5</analysisDurationHours>
+      <destroyedOnAnalyzed>true</destroyedOnAnalyzed>
+      <completedLetterLabel>Chip analyzed: {RESEARCH} unlocked</completedLetterLabel>
+      <completedLetter>By analyzing the microelectronics chip, {PAWN_labelShort} has unlocked the research project(s) {RESEARCH}.</completedLetter>
+      <completedLetterDef>PositiveEvent</completedLetterDef>
+      <activateTexPath>UI/Icons/Study</activateTexPath>
+      <activateLabelString>Analyze...</activateLabelString>
+      <activateDescString>Analyze the microelectronics chip.</activateDescString>
+      <jobString>Analyze microelectronics chip</jobString>
+      <guiLabelString>Choose who should analyze this</guiLabelString>
+      <inspectString>Can be analyzed by a colonist.</inspectString>
+      <targetingParameters>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+      </targetingParameters>
+    </li>
+  </comps>
+</ThingDef>
+</Defs>
